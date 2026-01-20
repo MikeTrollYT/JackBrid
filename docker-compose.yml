@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8998:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - ./jackett/config:/config
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    environment:
+      JACKETT_URL: ${JACKETT_URL}
+      JACKETT_API_KEY: ${JACKETT_API_KEY}
+      ALLDEBRID_API_KEY: ${ALLDEBRID_API_KEY}
+    volumes:
+      - ./backend/downloads:/app/downloads
