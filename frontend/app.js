@@ -16,7 +16,7 @@ const state = {
   results: [],
   downloads: [],
   links: {
-    jackett: "http://localhost:9117",
+    jackett: `http://${window.location.hostname}:9117`,
     alldebrid: "https://alldebrid.com/magnets/",
     alldebridApiKey: ""
   },
@@ -631,6 +631,11 @@ async function loadLinks() {
   try {
     const data = await apiGet(API.links);
     state.links = { ...state.links, ...data };
+    
+    // Si el link de Jackett contiene localhost, reemplazarlo con el hostname actual
+    if (state.links.jackett && state.links.jackett.includes('localhost')) {
+      state.links.jackett = state.links.jackett.replace('localhost', window.location.hostname);
+    }
     
     // Actualiza los href de los enlaces dinámicamente
     const jackettLink = el("linkJackett");
