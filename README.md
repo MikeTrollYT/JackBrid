@@ -6,7 +6,7 @@
 
 **Panel privado de búsqueda y streaming de torrents**
 
-**Documentación:** https://miketroll.es/JackBrid
+**Documentación:** https://miketroll.me/JackBrid
 
 Una aplicación web moderna que integra Jackett y AllDebrid para buscar, descargar y reproducir contenido torrent directamente en tu navegador.
 
@@ -331,3 +331,4 @@ Si tienes preguntas o sugerencias, no dudes en abrir un issue en GitHub.
 ⭐ Si te gusta el proyecto, ¡dale una estrella en GitHub!
 
 </div>
+
